@@ -17,14 +17,11 @@ jobs:
 
     - name: Cache gradle dependencies
       uses: actions/cache@v1
-      env:
-        cache-name: cache-gradle
       with:
-        path: ~/.gradle
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('gradle.properties') }}
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('gradle.properties') }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.cache-name }}-
-          ${{ runner.os }}-
+          ${{ runner.os }}-gradle-
 
     - name: Build with Gradle
       run: ./gradlew build --no-daemon || ./gradlew build --no-daemon
